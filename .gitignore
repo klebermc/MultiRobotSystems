@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# MATLAB autosave / Simulink cache
+*.asv
+*.m~
+slprj/
+*.slxc
+*.autosave
+
+# OS/editor cruft
+.DS_Store
+*.swp
+
