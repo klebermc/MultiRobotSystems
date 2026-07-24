@@ -1,5 +1,7 @@
 # MultiRobotSystems
 
+> **Note:** All code in this repository (MATLAB, Python, and Simulink) was written by Kleber Cabral. The README documentation and inline code comments were added with AI assistance (Claude).
+
 Multi-agent formation control experiments — consensus/distance-based controllers that drive a group of simulated nodes (robots/UAVs) into and around a target formation shape.
 
 ## Structure
