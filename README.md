@@ -11,8 +11,8 @@ Multi-agent formation control experiments — consensus/distance-based controlle
 ## Python simulation results
 
 A run of `python/formation_velcontrol.py` (100 s simulated). The nine nodes start at
-random positions, settle into the pyramid's relative geometry within about 10 s, and are
-dragged by the pinned node (blue) to the waypoint (green star). Once the pinned node is
+random positions and converge toward the pyramid's relative geometry while the pinned node
+(blue) drags the group to the waypoint (green star), which it reaches in about 10 s. Once the pinned node is
 within 0.2 m of the waypoint, the assembly stage starts: the target offsets shrink by
 0.1% per step and the formation contracts.
 
