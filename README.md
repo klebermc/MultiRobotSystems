@@ -1,8 +1,28 @@
 # MultiRobotSystems
 
-> **Note:** All code in this repository (MATLAB, Python, and Simulink) was written by Kleber Cabral. The README documentation and inline code comments were added with AI assistance (Claude).
+> **Note:** All code in this repository (MATLAB, Python, and Simulink) was written by Kleber Cabral. The README documentation, inline code comments and the figures in `figures/` (rendered from the Python simulation's logged output) were added with AI assistance (Claude).
 
 Multi-agent formation control experiments — consensus/distance-based controllers that drive a group of simulated nodes (robots/UAVs) into and around a target formation shape.
+
+<p align="center">
+  <img src="figures/formation_run.gif" alt="9-node pyramid formation following a pinned leader" width="420">
+</p>
+
+## Python simulation results
+
+A run of `python/formation_velcontrol.py` (100 s simulated). The nine nodes start at
+random positions, settle into the pyramid's relative geometry within about 10 s, and are
+dragged by the pinned node (blue) to the waypoint (green star). Once the pinned node is
+within 0.2 m of the waypoint, the assembly stage starts: the target offsets shrink by
+0.1% per step and the formation contracts.
+
+<p align="center">
+  <img src="figures/formation_snapshots.png" alt="Formation snapshots at t = 0, 10, 40 and 100 s" width="900">
+</p>
+
+<p align="center">
+  <img src="figures/formation_trajectories.png" alt="3D trajectories of all nodes" width="460">
+</p>
 
 ## Structure
 
@@ -15,6 +35,7 @@ MultiRobotSystems/
 │   └── formation_velcontrol.py       # 3D 9-node "pyramid" formation + waypoint navigation
 ├── simulink/
 │   └── formation_with_real_uavs.slx  # Simulink model for real UAV formation control
+├── figures/                          # images from a run of the Python simulation
 └── requirements.txt
 ```
 
@@ -49,6 +70,14 @@ For the MATLAB script, open `matlab/sim_formation_vel.m` in MATLAB and run it di
 ## Status
 
 Research/experimentation code, not a packaged library — no tests, no shared interface between the MATLAB, Python, and Simulink pieces. The MATLAB script in particular is set up as a scratchpad (multiple commented-out configurations) rather than a single finished scenario. A stray MATLAB autosave file (`sim_formation_vel.asv`) was removed during cleanup — it was an editor backup, not source.
+
+Known behaviour of the Python simulation, seen when running it for the figures
+(2026-10-02):
+- **No ground constraint.** The pinned node is the pyramid's apex, held at z = 0.5 m, so
+  the base nodes end up below z = 0 (lowest about −0.2 m).
+- **Only the first waypoint is used.** `nextwp` is never advanced, so the formation
+  flies to `WP[1]` and then assembles there, instead of looping the square path.
+- The live plot redraws every step, so a full run takes a few minutes.
 
 `sim_formation_vel.m` depends on `Auxiliar.m` (in the same folder) for its collision-avoidance math — both are now present and the script should run as committed.
 
